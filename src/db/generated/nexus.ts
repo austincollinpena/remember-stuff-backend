@@ -29,6 +29,7 @@ export interface NexusGenRootTypes {
   Link: prisma.Link;
   Mutation: {};
   Query: {};
+  User: prisma.User;
   String: string;
   Int: number;
   Float: number;
@@ -41,6 +42,8 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Link: { // field return type
+    author: NexusGenRootTypes['User']; // User!
+    authorId: number; // Int!
     createdAt: string; // String!
     description: string; // String!
     id: number; // Int!
@@ -48,10 +51,17 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addLink: NexusGenRootTypes['Link']; // Link!
-    addLinkModified: NexusGenRootTypes['Link']; // Link!
+    createUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
+  }
+  User: { // field return type
+    createdAt: string; // String!
+    email: string; // String!
+    id: number; // Int!
+    links: NexusGenRootTypes['Link'][]; // [Link!]!
+    password: string; // String!
   }
 }
 
@@ -61,9 +71,9 @@ export interface NexusGenArgTypes {
       description: string; // String!
       url: string; // String!
     }
-    addLinkModified: { // args
-      description: string; // String!
-      url: string; // String!
+    createUser: { // args
+      email: string; // String!
+      password: string; // String!
     }
   }
 }
@@ -73,7 +83,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Link" | "Mutation" | "Query";
+export type NexusGenObjectNames = "Link" | "Mutation" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 

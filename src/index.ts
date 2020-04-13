@@ -1,12 +1,18 @@
 import { PrismaClient } from "@prisma/client";
-import { GraphQLServer } from "graphql-yoga";
+import { ApolloServer } from "apollo-server-express";
+import "dotenv/config";
+import express from "express";
 import { schema } from "./utils";
 
 const prisma = new PrismaClient();
 
-// 3 - Server works with the type definitions and resolvers
-const server = new GraphQLServer({
+// Initialize server
+const app = express();
+
+const server = new ApolloServer({
+  // Why this not working?
   schema,
+
   context: () => {
     return {
       prisma
@@ -14,5 +20,8 @@ const server = new GraphQLServer({
   }
 });
 
-// tslint:disable-next-line:no-console
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+server.applyMiddleware({ app });
+
+app.listen({ port: 4000 }, () => {
+  console.log("server ready at http://localhost:4000");
+});

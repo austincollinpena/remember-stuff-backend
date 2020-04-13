@@ -12,4 +12,17 @@ model Link {
   description String
   id          Int      @default(autoincrement()) @id
   url         String
+  userId      Int?     @default(0)
+  // A Scalar field is needed for a one to many relationship
+  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    Int?     @default(0)
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String   @unique
+  id        Int      @default(autoincrement()) @id
+  password  String
+  // Here is the foreign key to the Link field
+  links     Link[]
 }
