@@ -10,11 +10,20 @@ export const LinkObjType = objectType({
   definition(t) {
     t.string("createdAt");
     t.string("description");
-    t.int("id", { description: "Id of the user" });
+    t.int("id", { description: "Id of link" });
     t.string("url");
-    t.int("authorId");
-    t.field("author", {
+    t.int("userId");
+    t.field("user", {
       type: UserObjType
     });
   }
 });
+
+// model Link {
+//   createdAt   DateTime @default(now())
+//   description String
+//   id          Int      @default(autoincrement()) @id
+//   url         String
+//   user        User?    @relation(fields: [userId], references: [id])
+//   userId      Int?     @unique
+// }

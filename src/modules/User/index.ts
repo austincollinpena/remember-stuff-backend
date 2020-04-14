@@ -1,2 +1,2 @@
-export * from "./Mutation";
+export * from "./CreateUser";
 export * from "./Type";

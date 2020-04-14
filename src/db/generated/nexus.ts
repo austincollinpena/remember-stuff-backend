@@ -26,9 +26,16 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
+  AuthPayload: { // root type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Link: prisma.Link;
   Mutation: {};
+  Profile: prisma.Profile;
   Query: {};
+  RememberItemCategory: prisma.RememberItemCategory;
+  RememberItems: prisma.RememberItems;
   User: prisma.User;
   String: string;
   Int: number;
@@ -41,32 +48,62 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+  }
   Link: { // field return type
-    author: NexusGenRootTypes['User']; // User!
-    authorId: number; // Int!
     createdAt: string; // String!
     description: string; // String!
     id: number; // Int!
     url: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
   }
   Mutation: { // field return type
+    addCategory: NexusGenRootTypes['RememberItemCategory']; // RememberItemCategory!
     addLink: NexusGenRootTypes['Link']; // Link!
     createUser: NexusGenRootTypes['User']; // User!
+  }
+  Profile: { // field return type
+    id: number; // Int!
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
   }
+  RememberItemCategory: { // field return type
+    category: string; // String!
+    id: number; // Int!
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
+  }
+  RememberItems: { // field return type
+    category: NexusGenRootTypes['RememberItemCategory']; // RememberItemCategory!
+    categoryId: number; // Int!
+    createdAt: string; // String!
+    id: number; // Int!
+    item: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
+  }
   User: { // field return type
+    categories: NexusGenRootTypes['RememberItemCategory'][]; // [RememberItemCategory!]!
     createdAt: string; // String!
     email: string; // String!
     id: number; // Int!
     links: NexusGenRootTypes['Link'][]; // [Link!]!
     password: string; // String!
+    RememberItems: NexusGenRootTypes['RememberItems'][]; // [RememberItems!]!
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addCategory: { // args
+      category: string; // String!
+    }
     addLink: { // args
       description: string; // String!
       url: string; // String!
@@ -83,7 +120,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Link" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "AuthPayload" | "Link" | "Mutation" | "Profile" | "Query" | "RememberItemCategory" | "RememberItems" | "User";
 
 export type NexusGenInputNames = never;
 

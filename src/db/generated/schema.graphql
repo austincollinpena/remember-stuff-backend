@@ -2,27 +2,57 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
 type Link {
-  author: User!
-  authorId: Int!
   createdAt: String!
   description: String!
 
-  """Id of the user"""
+  """Id of link"""
   id: Int!
   url: String!
+  user: User!
+  userId: Int!
 }
 
 type Mutation {
+  addCategory(category: String!): RememberItemCategory!
   addLink(description: String!, url: String!): Link!
   createUser(email: String!, password: String!): User!
+}
+
+type Profile {
+  id: Int!
+  user: User!
+  userId: Int!
 }
 
 type Query {
   ok: Boolean!
 }
 
+type RememberItemCategory {
+  category: String!
+  id: Int!
+  user: User!
+  userId: Int!
+}
+
+type RememberItems {
+  category: RememberItemCategory!
+  categoryId: Int!
+  createdAt: String!
+  id: Int!
+  item: String!
+  user: User!
+  userId: Int!
+}
+
 type User {
+  categories: [RememberItemCategory!]!
   createdAt: String!
   email: String!
 
@@ -30,4 +60,5 @@ type User {
   id: Int!
   links: [Link!]!
   password: String!
+  RememberItems: [RememberItems!]!
 }

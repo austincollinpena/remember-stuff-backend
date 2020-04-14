@@ -1,5 +1,6 @@
 import { objectType } from "@nexus/schema";
 import { LinkObjType } from "../Link";
+import { RememberItemsObjType } from "../RememberItems";
 
 // https://nexus.js.org/ => library
 // Prisma Bindings for Nexus => https://www.nexusjs.org/#/components/schema/plugins/prisma
@@ -14,6 +15,22 @@ export const UserObjType = objectType({
     t.string("password");
     t.list.field("links", {
       type: LinkObjType
+    });
+    t.list.field("categories", {
+      type: "RememberItemCategory"
+    });
+    t.list.field("RememberItems", {
+      type: RememberItemsObjType
+    });
+  }
+});
+
+export const AuthPayload = objectType({
+  name: "AuthPayload",
+  definition(t) {
+    t.string("token");
+    t.field("user", {
+      type: UserObjType
     });
   }
 });
