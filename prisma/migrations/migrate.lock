@@ -4,3 +4,11 @@
 # Read more about conflict resolution here: TODO
 
 20200412225551-first-migration
+20200413141050-adding-user-model
+20200413141228-adding-user
+20200413141354-adding-user
+20200413222930-adding-user
+20200413224045-user-and-profile-model
+20200413224414-changing-profile-to-user
+20200413224532-added-user
+20200413225543-adding-remember-and-items
